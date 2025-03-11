@@ -7,6 +7,7 @@ It provides functions to:
 - Identify low-stock items below a threshold
 - Process orders and update stock levels
 
+
 Author: [Your Name]
 """
 
@@ -28,10 +29,11 @@ inventory = {
     },
 }
 
+
 def count_total_items(inventory):
     """Counts total items in all categories."""
-    total = sum(item["stock"] for category in inventory.values() for item in category.values())
-    return total
+    return sum(item["stock"] for category in inventory.values() for item in category.values())
+
 
 def find_low_stock_items(inventory, threshold=5):
     """Finds items with stock below a given threshold."""
@@ -41,6 +43,7 @@ def find_low_stock_items(inventory, threshold=5):
             if details["stock"] < threshold:
                 low_stock.setdefault(category, {})[item] = details["stock"]
     return low_stock
+
 
 def process_order(inventory, category, item, quantity):
     """
@@ -56,16 +59,17 @@ def process_order(inventory, category, item, quantity):
             return f"Insufficient stock for {item}. Only {inventory[category][item]['stock']} left."
     return f"Item '{item}' not found in category '{category}'."
 
+
 # Main execution for testing functions
 if __name__ == "__main__":
     print("Total items in inventory:", count_total_items(inventory))
-    
+   
     low_stock_items = find_low_stock_items(inventory, threshold=5)
     print("\nLow stock items (below threshold 5):", low_stock_items)
-    
+   
     print("\nProcessing order for 3 MacBook Pro 14...")
     print(process_order(inventory, "Laptops", "MacBook Pro 14", 3))
-    
+   
     print("\nProcessing order for 10 iPhone 14 (should fail due to stock)...")
     print(process_order(inventory, "Smartphones", "iPhone 14", 10))
 

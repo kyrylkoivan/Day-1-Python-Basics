@@ -8,7 +8,7 @@ It provides functions to:
 - Process orders and update stock levels
 
 
-Author: [Your Name]
+Author: Ivan Kyrylko
 """
 
 # Sample Inventory Data (Nested Dictionary Format)

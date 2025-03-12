@@ -1,10 +1,23 @@
-# NumPy Mini-Projects: Client Sales Analysis & Discount Calculation
+# 🚀 NumPy Mini-Projects: Client Sales Analysis & Discount Calculation
+
+## 📌 Table of Contents
+- [Project Overview](#project-overview)
+- [Client Sales Data Analysis](#client-sales-data-analysis)
+- [NumPy Discount Calculation Script](#numpy-discount-calculation-script)
+- [What I Learned](#what-i-learned)
+- [Next Steps](#next-steps)
+- [How to Run](#how-to-run)
+- [Contributing](#contributing)
+
+---
 
 ## 📌 Project Overview
 This repository contains **two NumPy-powered mini-projects** that demonstrate efficient data processing, broadcasting, and statistical analysis:
 
 1. **Client Sales Data Analysis** - Automates statistical calculations on mock client sales data.
 2. **NumPy Discount Calculation** - Applies dynamic discount rates to a fictional customer dataset using **NumPy broadcasting**.
+
+These projects utilize **NumPy, Pandas, and Python** to efficiently manipulate data and automate numerical analysis tasks.
 
 ---
 
@@ -42,13 +55,15 @@ Using NumPy broadcasting for element-wise operations **removes the need for loop
 2. **Vectorized calculations and broadcasting** help perform arithmetic operations efficiently across arrays of different shapes.  
 3. **Combining NumPy with Pandas** makes it easy to structure, analyze, and export data for real-world applications.  
 4. **NumPy broadcasting simplifies element-wise operations** without explicit iteration, optimizing performance.  
+5. **Git Branching & Merging** – I practiced creating feature branches, resolving merge conflicts, and structuring commits properly.
 
 ---
 
 ## 🚀 Next Steps
 🔹 Apply similar analysis to **real-world datasets**.  
-🔹 Explore **Matplotlib and Seaborn** for visualizing statistical results.  
-🔹 Automate larger-scale data analysis by integrating **Pandas, NumPy, and Matplotlib**.  
+🔹 Explore **Matplotlib and Seaborn** to visualize sales trends.  
+🔹 Implement an **automated reporting system** that generates weekly insights.  
+🔹 Experiment with **machine learning** by using NumPy-powered regression models.  
 
 ---
 

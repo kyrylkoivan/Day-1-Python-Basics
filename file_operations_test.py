@@ -1,38 +1,47 @@
 import os
 import shutil
 
-# Define test folder name
-test_folder = "dummy_test_folder"
+# Define directory paths
+SOURCE_DIR = "dummy_test_folder"
+DEST_DIR = "organized_files"
 
-# Create the folder if it doesn't exist
-if not os.path.exists(test_folder):
-    os.makedirs(test_folder)
+# File type categories
+FILE_CATEGORIES = {
+    "Documents": [".pdf", ".docx", ".txt", ".csv"],
+    "Images": [".jpg", ".jpeg", ".png", ".gif"],
+    "Archives": [".zip", ".rar", ".tar"],
+    "Scripts": [".py", ".sh", ".bat"]
+}
 
-# Create dummy files
-for i in range(1, 6):
-    with open(os.path.join(test_folder, f"test_file_{i}.txt"), "w") as f:
-        f.write(f"Sample content for file {i}")
+# Ensure destination folders exist
+for category in FILE_CATEGORIES.keys():
+    os.makedirs(os.path.join(DEST_DIR, category), exist_ok=True)
 
-print("Dummy test folder and files created successfully.")
 
-# List files in the directory
-print("Files before renaming:", os.listdir(test_folder))
+def safe_move(file_path, dest_folder):
+    """Moves a file safely, handling exceptions."""
+    try:
+        shutil.move(file_path, dest_folder)
+        print(f"Successfully moved {file_path} → {dest_folder}")
+    except FileNotFoundError:
+        print(f"Error: {file_path} not found.")
+    except PermissionError:
+        print(f"Permission denied: {file_path}")
+    except Exception as e:
+        print(f"Unexpected error moving {file_path}: {e}")
 
-# Rename first file
-old_name = os.path.join(test_folder, "test_file_1.txt")
-new_name = os.path.join(test_folder, "renamed_file_1.txt")
+# Use safe_move in move_files_by_extension
+def move_files_by_extension(source_dir, dest_dir, categories):
+    """Moves files into categorized folders based on their extensions."""
+    for file in os.listdir(source_dir):
+        file_path = os.path.join(source_dir, file)
 
-if os.path.exists(old_name):
-    os.rename(old_name, new_name)
-    print(f"Renamed: {old_name} -> {new_name}")
+        if not os.path.isfile(file_path):
+            continue
 
-# Move renamed file to a new subdirectory
-destination_folder = os.path.join(test_folder, "sorted_files")
-if not os.path.exists(destination_folder):
-    os.makedirs(destination_folder)
-
-shutil.move(new_name, os.path.join(destination_folder, "renamed_file_1.txt"))
-print(f"Moved {new_name} to {destination_folder}")
-
-# List files after operations
-print("Files after renaming & moving:", os.listdir(test_folder))
+        file_ext = os.path.splitext(file)[1].lower()
+        for category, extensions in categories.items():
+            if file_ext in extensions:
+                target_folder = os.path.join(dest_dir, category)
+                safe_move(file_path, target_folder)
+                break

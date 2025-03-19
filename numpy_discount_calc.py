@@ -1,45 +1,48 @@
 import numpy as np
 import pandas as pd
 
-# Simulated dataset: Each row represents a customer
-# Columns: [Customer ID, Purchase Amount]
-customers = np.array([
-    [101, 250.0],
-    [102, 400.0],
-    [103, 150.0],
-    [104, 600.0],
-    [105, 350.0],
-])
+def validate_customers(customers):
+    if customers.shape[1] != 2:
+        raise ValueError("Customers data must have 2 columns (ID, Amount).")
 
-# Customer categories based on Purchase Amount
-# High spenders (>500) get 20% discount, mid spenders (200-500) get 10%,
-# low spenders (<200) get 5%
-discount_rates = np.array([0.05, 0.10, 0.20])
+def calculate_discounts(customers):
+    conditions = [
+        customers[:, 1] < 200,
+        (customers[:, 1] >= 200) & (customers[:, 1] <= 500),
+        customers[:, 1] > 500
+    ]
+    rates = np.array([0.05, 0.10, 0.20])
+    return np.select(conditions, rates, default=0)
 
-# Apply broadcasting to determine the discount rate for each customer
-conditions = [
-    customers[:, 1] < 200,  # Low spenders
-    (customers[:, 1] >= 200) & (customers[:, 1] <= 500),  # Mid spenders
-    customers[:, 1] > 500  # High spenders
-]
+def compute_final_prices(customers, discounts):
+    return customers[:, 1] * (1 - discounts)
 
-# Assign appropriate discount rates
-customer_discounts = np.select(conditions, discount_rates)
+def create_discount_df(customers, discounts, final_prices):
+    df = pd.DataFrame(
+        np.column_stack((customers, discounts, final_prices)),
+        columns=["Customer ID", "Purchase Amount", "Discount Rate", "Final Price"]
+    )
+    df["Customer ID"] = df["Customer ID"].astype(int)
+    return df
 
-# Calculate final prices after applying the discount
-final_prices = customers[:, 1] * (1 - customer_discounts)
+def process_discounts():
+    try:
+        customers = np.array([
+            [101, 250.0],
+            [102, 400.0],
+            [103, 150.0],
+            [104, 600.0],
+            [105, 350.0],
+        ])
 
-# Combine results into a structured NumPy array
-final_data = np.column_stack((customers, customer_discounts, final_prices))
+        validate_customers(customers)
+        discounts = calculate_discounts(customers)
+        final_prices = compute_final_prices(customers, discounts)
+        df = create_discount_df(customers, discounts, final_prices)
+        print(df)
+        df.to_csv("discounted_customers.csv", index=False)
+    except Exception as e:
+        print(f"Error occurred: {e}")
 
-# Convert to Pandas DataFrame for better readability
-columns = ["Customer ID", "Purchase Amount", "Discount Rate", "Final Price"]
-df = pd.DataFrame(final_data, columns=columns)
-
-# Display the final results
-df["Customer ID"] = df["Customer ID"].astype(int)
-# Convert Customer ID to integer for clarity
-print(df)
-
-# Save results to CSV
-df.to_csv("discounted_customers.csv", index=False)
+if __name__ == "__main__":
+    process_discounts()

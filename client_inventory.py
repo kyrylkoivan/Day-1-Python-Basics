@@ -1,17 +1,9 @@
 """
-Client Inventory Management Script
-----------------------------------
-This script manages a nested dictionary mimicking a client inventory (e.g., an electronic store).
-It provides functions to:
-- Count total inventory items
-- Identify low-stock items below a threshold
-- Process orders and update stock levels
-
-
-Author: Ivan Kyrylko
+Client Inventory Management Script (Refactored)
+----------------------------------------------
+Modular version with reusable functions.
 """
 
-# Sample Inventory Data (Nested Dictionary Format)
 inventory = {
     "Laptops": {
         "Dell XPS 13": {"stock": 10, "price": 1200},
@@ -29,48 +21,39 @@ inventory = {
     },
 }
 
-
 def count_total_items(inventory):
-    """Counts total items in all categories."""
     return sum(item["stock"] for category in inventory.values() for item in category.values())
 
-
 def find_low_stock_items(inventory, threshold=5):
-    """Finds items with stock below a given threshold."""
-    low_stock = {}
-    for category, items in inventory.items():
-        for item, details in items.items():
-            if details["stock"] < threshold:
-                low_stock.setdefault(category, {})[item] = details["stock"]
-    return low_stock
-
+    return {
+        category: {item: details["stock"] for item, details in items.items() if details["stock"] < threshold}
+        for category, items in inventory.items()
+        if any(details["stock"] < threshold for details in items.values())
+    }
 
 def process_order(inventory, category, item, quantity):
-    """
-    Processes a simulated order:
-    - Checks stock availability
-    - Updates inventory if stock is sufficient
-    """
     if category in inventory and item in inventory[category]:
-        if inventory[category][item]["stock"] >= quantity:
+        stock = inventory[category][item]["stock"]
+        if stock >= quantity:
             inventory[category][item]["stock"] -= quantity
-            return f"Order successful! {quantity} {item}(s) processed."
-        else:
-            return f"Insufficient stock for {item}. Only {inventory[category][item]['stock']} left."
+            return f"Order successful: {quantity} {item}(s) processed."
+        return f"Insufficient stock for {item}. Only {stock} left."
     return f"Item '{item}' not found in category '{category}'."
 
+def display_inventory(inventory):
+    print("\nCurrent Inventory:")
+    for category, items in inventory.items():
+        print(f"\nCategory: {category}")
+        for item, details in items.items():
+            print(f"  {item}: Stock={details['stock']}, Price=${details['price']}")
 
-# Main execution for testing functions
-if __name__ == "__main__":
+def main():
     print("Total items in inventory:", count_total_items(inventory))
-   
-    low_stock_items = find_low_stock_items(inventory, threshold=5)
-    print("\nLow stock items (below threshold 5):", low_stock_items)
-   
-    print("\nProcessing order for 3 MacBook Pro 14...")
-    print(process_order(inventory, "Laptops", "MacBook Pro 14", 3))
-   
-    print("\nProcessing order for 10 iPhone 14 (should fail due to stock)...")
+    display_inventory(inventory)
+    print("\nLow stock items:", find_low_stock_items(inventory, threshold=5))
+    print("\n", process_order(inventory, "Laptops", "MacBook Pro 14", 3))
     print(process_order(inventory, "Smartphones", "iPhone 14", 10))
+    display_inventory(inventory)
 
-    print("\nUpdated Inventory:", inventory)
+if __name__ == "__main__":
+    main()

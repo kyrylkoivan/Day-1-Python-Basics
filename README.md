@@ -2,10 +2,12 @@
 
 ## 📌 Table of Contents
 - [Project Overview](#project-overview)
+- [Repository Structure](#repository-structure)
 - [Client Sales Data Analysis](#client-sales-data-analysis)
 - [NumPy Discount Calculation Script](#numpy-discount-calculation-script)
 - [What I Learned](#what-i-learned)
 - [Next Steps](#next-steps)
+- [Setup Instructions](#setup-instructions)
 - [How to Run](#how-to-run)
 - [Contributing](#contributing)
 
@@ -18,6 +20,22 @@ This repository contains **two NumPy-powered mini-projects** that demonstrate ef
 2. **NumPy Discount Calculation** - Applies dynamic discount rates to a fictional customer dataset using **NumPy broadcasting**.
 
 These projects utilize **NumPy, Pandas, and Python** to efficiently manipulate data and automate numerical analysis tasks.
+
+---
+
+## 📂 Repository Structure
+
+| File/Folder               | Description                                                       |
+|--------------------------|-------------------------------------------------------------------|
+| `client_inventory.py`     | Manages client inventories using nested dictionaries.             |
+| `client_discount.py`      | Applies dynamic discounts based on customer data.                 |
+| `sales_analysis.py`       | Automates statistical analysis on client sales using NumPy.       |
+| `numpy_discount_calc.py`  | Demonstrates broadcasting for efficient discount application.     |
+| `exception_practice.py`   | Practice scripts for handling common Python exceptions.           |
+| `user_info_formatter.py`  | Formats structured user data with advanced string methods.        |
+| `sales_summary.csv`       | Output CSV of client sales summary.                               |
+| `discounted_customers.csv`| Output CSV of discounted client sales data.                       |
+| `README.md`               | Project documentation.                                            |
 
 ---
 
@@ -34,6 +52,13 @@ This mini-project automates the calculation and statistical analysis of mock cli
 ✅ Normalizes sales data for easier comparison.  
 ✅ Saves the processed results into a structured CSV file (`sales_summary.csv`).  
 
+### 📊 Sample Output
+
+| Client ID | Total Sales | Average Sales | Std Dev | Max Sale | Min Sale |
+|----------|-------------|--------------|--------|--------|--------|
+| 1001     |   $5,230    |   $747       |  $98   | $920   | $590   |
+| 1002     |   $4,890    |   $698       |  $102  | $870   | $530   |
+
 ---
 
 ## 💰 NumPy Discount Calculation Script
@@ -43,7 +68,7 @@ This script simulates a **customer discount calculation system** using NumPy **b
 - Categorizes customers into **low, mid, and high spenders**.
 - Applies **appropriate discount rates** using NumPy broadcasting.
 - Computes final prices **without using loops**.
-- Saves the structured results into a **Pandas DataFrame** and exports them to `discounted_sales.csv`.
+- Saves the structured results into a **Pandas DataFrame** and exports them to `discounted_customers.csv`.
 
 ### 🔥 Why This Matters
 Using NumPy broadcasting for element-wise operations **removes the need for loops**, making the calculations much more efficient compared to traditional approaches.
@@ -67,8 +92,12 @@ Using NumPy broadcasting for element-wise operations **removes the need for loop
 
 ---
 
-## 🛠 How to Run
-1️⃣ Clone the repository:
+## 🛠 Setup Instructions
+Ensure you have the following installed:
+- Python 3.9+
+- NumPy
+- Pandas
+
+Install dependencies:
 ```bash
-git clone <your-repo-link>
-cd <repo-name>
+pip install numpy pandas

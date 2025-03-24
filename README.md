@@ -1,74 +1,148 @@
-# 🚀 NumPy Mini-Projects: Client Sales Analysis & Discount Calculation
+---
 
-## 📌 Table of Contents
-- [Project Overview](#project-overview)
-- [Client Sales Data Analysis](#client-sales-data-analysis)
-- [NumPy Discount Calculation Script](#numpy-discount-calculation-script)
-- [What I Learned](#what-i-learned)
-- [Next Steps](#next-steps)
-- [How to Run](#how-to-run)
-- [Contributing](#contributing)
+## 🏗️ Setup & Dependencies
+
+This repository was carefully structured for **scalability, maintainability, and professionalism**. Below is the detailed setup guide, including environment setup, dependencies, and verification.
+
+### 📦 Dependencies
+
+The project leverages the following core Python libraries:
+
+- **NumPy** – For efficient array and numerical computations.
+- **Pandas** – For structured data manipulation and CSV exporting.
+- **Great Expectations** – For robust data validation and quality checks.
+- **Python-Dotenv** (optional) – For managing environment variables.
+- **Pytest** (optional) – For future automated testing implementations.
 
 ---
 
-## 📌 Project Overview
-This repository contains **two NumPy-powered mini-projects** that demonstrate efficient data processing, broadcasting, and statistical analysis:
+### 🔥 What I Implemented
 
-1. **Client Sales Data Analysis** - Automates statistical calculations on mock client sales data.
-2. **NumPy Discount Calculation** - Applies dynamic discount rates to a fictional customer dataset using **NumPy broadcasting**.
+This repository is more than just scripts; it's a structured, production-ready project showcasing:
 
-These projects utilize **NumPy, Pandas, and Python** to efficiently manipulate data and automate numerical analysis tasks.
+✅ **Professional Repository Structure**:  
+- All scripts are cleanly organized under `/scripts`, datasets under `/data`, and configurations clearly separated.
+  
+✅ **Feature Branch Workflow**:  
+- Each feature (e.g., data merge, file automation) was developed in a dedicated GitHub feature branch, merged cleanly after successful testing.
 
----
+✅ **Version Control Mastery**:  
+- Practiced branching, rebasing, squashing commits, and resolving merge conflicts.
+  
+✅ **Exception Handling**:  
+- Integrated robust `try-except` blocks across scripts like `numpy_discount_calc.py` to handle edge cases gracefully.
 
-## 🛒 Client Sales Data Analysis
-This mini-project automates the calculation and statistical analysis of mock client sales data using **NumPy**. It processes daily sales records for multiple clients, computing essential metrics like **total sales, average sales, standard deviation, minimum and maximum values**. The final structured summary is displayed in a **Pandas DataFrame** and saved as a CSV file.
+✅ **PEP-8 Compliance & Modularity**:  
+- All code follows Python’s PEP-8 guidelines with clean, reusable functions and detailed docstrings.
 
-### ✨ Key Features
-✅ Generates mock **2D NumPy arrays** representing client sales data over a week.  
-✅ Performs statistical operations, including:
-   - **Total sales per client**
-   - **Average daily sales**
-   - **Standard deviation of sales**
-   - **Maximum and minimum sales recorded**  
-✅ Normalizes sales data for easier comparison.  
-✅ Saves the processed results into a structured CSV file (`sales_summary.csv`).  
+✅ **ETL Automation Scripts**:  
+- Created scripts like `sales_analysis.py` and `file_automation.py` handling real-world automation tasks, file categorization, renaming, and data processing.
 
----
+✅ **Data Quality Assurance**:  
+- Set up **Great Expectations**, initialized a new project, and built expectation suites to ensure merged datasets' integrity.
 
-## 💰 NumPy Discount Calculation Script
-This script simulates a **customer discount calculation system** using NumPy **broadcasting** to apply different discount rates based on purchase amounts.
-
-### 🔹 How It Works
-- Categorizes customers into **low, mid, and high spenders**.
-- Applies **appropriate discount rates** using NumPy broadcasting.
-- Computes final prices **without using loops**.
-- Saves the structured results into a **Pandas DataFrame** and exports them to `discounted_sales.csv`.
-
-### 🔥 Why This Matters
-Using NumPy broadcasting for element-wise operations **removes the need for loops**, making the calculations much more efficient compared to traditional approaches.
+✅ **Public Documentation & Branding**:  
+- Regularly shared progress through LinkedIn posts with clean visuals, reinforcing transparency and professionalism.
 
 ---
 
-## 📚 What I Learned
-1. **NumPy is powerful for numerical analysis** – it significantly speeds up array operations compared to Python lists.  
-2. **Vectorized calculations and broadcasting** help perform arithmetic operations efficiently across arrays of different shapes.  
-3. **Combining NumPy with Pandas** makes it easy to structure, analyze, and export data for real-world applications.  
-4. **NumPy broadcasting simplifies element-wise operations** without explicit iteration, optimizing performance.  
-5. **Git Branching & Merging** – I practiced creating feature branches, resolving merge conflicts, and structuring commits properly.
+### 🖥 Installation Instructions
 
----
+To replicate the environment:
 
-## 🚀 Next Steps
-🔹 Apply similar analysis to **real-world datasets**.  
-🔹 Explore **Matplotlib and Seaborn** to visualize sales trends.  
-🔹 Implement an **automated reporting system** that generates weekly insights.  
-🔹 Experiment with **machine learning** by using NumPy-powered regression models.  
-
----
-
-## 🛠 How to Run
-1️⃣ Clone the repository:
 ```bash
+# 1️⃣ Clone the repository
 git clone <your-repo-link>
 cd <repo-name>
+
+# 2️⃣ Set up a virtual environment (recommended)
+python -m venv venv
+# Activate virtual environment:
+# On Windows:
+venv\Scripts\activate
+# On Mac/Linux:
+source venv/bin/activate
+
+# 3️⃣ Upgrade pip and install dependencies
+pip install --upgrade pip
+pip install -r requirements.txt
+
+# In case requirements.txt is not present, manually install:
+pip install numpy pandas great_expectations python-dotenv pytest
+```
+
+---
+
+### ✅ Verification & Testing Approach
+
+You can verify correct installation and functionality as follows:
+
+```bash
+# Check Python version
+python --version
+
+# Check installed packages
+pip list
+
+# Run primary scripts
+python scripts/sales_analysis.py
+python scripts/numpy_discount_calc.py
+python scripts/data_merge.py
+python scripts/file_automation.py
+
+# Validate merged datasets using Great Expectations
+great_expectations checkpoint run sales_data_checkpoint
+```
+
+---
+
+### 📂 Project Structure Overview
+
+```
+├── README.md
+├── requirements.txt
+├── venv/                      # Virtual environment (excluded from Git)
+├── data/                      # Contains sales CSV files, datasets
+│   └── sales_dataset_1.csv
+│   └── sales_dataset_2.csv
+│   └── sales_dataset_3.csv
+├── scripts/                   # All project scripts neatly organized
+│   └── client_inventory.py
+│   └── numpy_discount_calc.py
+│   └── sales_analysis.py
+│   └── data_merge.py
+│   └── list_dict_practice.py
+│   └── broadcasting_exercise_01.py - broadcasting_exercise_10.py
+│   └── exception_practice.py
+│   └── user_info_formatter.py
+│   └── file_automation.py
+├── great_expectations/        # Great Expectations project directory
+├── day1_plan.md               # Task scope notes
+└── .gitignore                 # Excludes venv/, __pycache__/, data exports, etc.
+```
+
+---
+
+### 📚 What This Demonstrates
+
+By reviewing or cloning this repository, you'll see a professional-level example of:
+
+1. **Systematic project organization**
+2. **Clean, modular, and well-documented Python scripts**
+3. **Proficiency in NumPy, Pandas, and file automation**
+4. **Advanced Git branching, rebasing, and merge conflict handling**
+5. **Robust exception handling strategies**
+6. **Data quality checks via Great Expectations**
+7. **Effective public documentation and portfolio building**
+
+---
+
+### 🌟 Next Steps
+
+- Integrate **Matplotlib/Seaborn** for visualization of analysis results.
+- Extend the ETL scripts to pull real-world APIs and datasets.
+- Implement **unit testing** using `pytest` for automation reliability.
+- Experiment with **machine learning models** (NumPy-powered regression).
+
+---
+
